@@ -1,0 +1,18 @@
+{
+  "timeZone": "Asia/Tokyo",
+  "dependencies": {
+    "libraries": [
+      {
+        "userSymbol": "SSheetDB",
+        "version": "5",
+        "libraryId": "1m-mnNjwCIxUCgoZxTeHpvICFyntLCs52IjSxfHGA-6MbBiym441opQ21"
+      }
+    ]
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "webapp": {
+    "executeAs": "USER_DEPLOYING",
+    "access": "DOMAIN"
+  }
+}
