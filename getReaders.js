@@ -3,7 +3,7 @@ function getReaders(id) {
   .select(['department'])
   .where({'id': ['==', id]})
   .result(true);
-  
+
   const results = tableRoutes
   .select(['email'])
   .where({

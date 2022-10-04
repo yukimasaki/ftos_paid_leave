@@ -100,10 +100,13 @@ function doGet(e) {
         sendEmail(formResponses.recipientEmail, subject, emailBody);
 
         // 回覧者にメールを送信する
-        const readersArray = getReaders(id);
-        const readersString = readersArray.join(',');
-        sendEmail(readersString, subject, emailBody);
-
+        if (getReaders(id) == '') {
+          ;
+        } else {
+          const readersArray = getReaders(id);
+          const readersString = readersArray.join(',');
+          sendEmail(readersString, subject, emailBody);
+        }
       }
 
     // メールの「否認」リンクがクリックされた場合
@@ -145,10 +148,13 @@ function doGet(e) {
       sendEmail(formResponses.recipientEmail, subject, emailBody);
 
       // 回覧者にメールを送信する
-      const readersArray = getReaders(id);
-      const readersString = readersArray.join(',');
-      sendEmail(readersString, subject, emailBody);
-
+      if (getReaders(id) == '') {
+        ;
+      } else {
+        const readersArray = getReaders(id);
+        const readersString = readersArray.join(',');
+        sendEmail(readersString, subject, emailBody);
+      }
     }
   }
 
