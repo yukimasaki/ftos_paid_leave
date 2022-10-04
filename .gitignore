@@ -1,4 +1,4 @@
-.npm
+/.npm
 .clasp.json
 .clasprc.json
 setSettings.js
