@@ -1,9 +1,9 @@
 function updatePaidLeave(id, args) {
   tablePaidLeaves
   .update({
-    'status': status,
-    'token': token,
-    'current_approval_step': currentApprovalStep
+    'status': args.status,
+    'token': args.token,
+    'current_approval_step': args.currentApprovalStep
   },{
     'id': ['==', id]
   });
