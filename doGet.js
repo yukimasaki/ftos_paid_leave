@@ -24,7 +24,7 @@ function doGet(e) {
 
         const status = '承認中';
         const token = createId(25, 36);
-        let currentApprovalStep =  getCurrentApprovalStep(id);
+        let currentApprovalStep = getCurrentApprovalStep(id);
         currentApprovalStep++;
 
         // updatePaidLeaveに渡すargsオブジェクト
@@ -66,7 +66,7 @@ function doGet(e) {
 
         const status = '承認完了';
         const token = createId(25, 36);
-        const currentApprovalStep =  getCurrentApprovalStep(id);
+        const currentApprovalStep = getCurrentApprovalStep(id);
 
         // updatePaidLeaveに渡すargsオブジェクト
         const args = {
@@ -111,7 +111,7 @@ function doGet(e) {
 
       const status = '否認';
       const token = createId(25, 36);
-      const currentApprovalStep =  getCurrentApprovalStep(id);
+      const currentApprovalStep = getCurrentApprovalStep(id);
 
       // updatePaidLeaveに渡すargsオブジェクト
       const args = {
