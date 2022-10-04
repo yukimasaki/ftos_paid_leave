@@ -10,13 +10,15 @@ function getFormResponsesByFormId(formId) {
 
   // 設問を取得
   const questions = itemResponses.map(value => value.getItem().getTitle());
-  
+
   // 回答を取得
   const answers = itemResponses.map(value => value.getResponse());
-  
-  return [
+
+  const results = {
     recipientEmail,
     questions,
     answers
-  ];
+  };
+
+  return results;
 }

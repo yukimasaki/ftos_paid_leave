@@ -43,24 +43,20 @@ function doGet(e) {
         const formId = getFormIdById(id);
 
         // フォームIDを渡してフォームから回答内容を取得する
-        const [
-          recipientEmail,
-          questions,
-          answers
-        ] = getFormResponsesByFormId(formId);
+        const formResponses = getFormResponsesByFormId(formId);
 
         // 申請者の情報を取得
-        const [name, department] = getEmployeeProfiles(recipientEmail);
+        const employee = getEmployee(formResponses.recipientEmail);
 
         // 承認者のメールアドレスを取得
         const approverEmail = getCurrentApprover(id);
 
         // メール本文を生成
-        let emailBody = createEmailBody(name, department, questions, answers);
+        let emailBody = createEmailBody(employee[0].name, employee[0].department, formResponses.questions, formResponses.answers);
         emailBody = emailBody + addApprovalLink(id, token);
 
         // 件名を作成
-        const subject = '[承認依頼] 休暇申請 申請者：' + name;
+        const subject = '[承認依頼] 休暇申請 申請者：' + employee[0].name;
 
         // 承認者にメールを送信
         sendEmail(approverEmail, subject, emailBody);
@@ -89,23 +85,19 @@ function doGet(e) {
         const formId = getFormIdById(id);
 
         // フォームIDを渡してフォームから回答内容を取得する
-        const [
-          recipientEmail,
-          questions,
-          answers
-        ] = getFormResponsesByFormId(formId);
+        const formResponses = getFormResponsesByFormId(formId);
 
         // 申請者の情報を取得
-        const [name, department] = getEmployeeProfiles(recipientEmail);
+        const employee = getEmployee(formResponses.recipientEmail);
 
         // メール本文を生成
-        const emailBody = createEmailBody(name, department, questions, answers);
+        const emailBody = createEmailBody(employee[0].name, employee[0].department, formResponses.questions, formResponses.answers);
 
         // 件名を作成
-        const subject = '[回覧][承認されました] 休暇申請 申請者：' + name;
+        const subject = '[回覧][承認されました] 休暇申請 申請者：' + employee[0].name;
 
         // 申請者にメールを送信
-        sendEmail(recipientEmail, subject, emailBody);
+        sendEmail(formResponses.recipientEmail, subject, emailBody);
 
         // 回覧者にメールを送信する
         const readersArray = getReaders(id);
@@ -138,23 +130,19 @@ function doGet(e) {
       const formId = getFormIdById(id);
 
       // フォームIDを渡してフォームから回答内容を取得する
-      const [
-        recipientEmail,
-        questions,
-        answers
-      ] = getFormResponsesByFormId(formId);
+      const formResponses = getFormResponsesByFormId(formId);
 
       // 申請者の情報を取得
-      const [name, department] = getEmployeeProfiles(recipientEmail);
+      const employee = getEmployee(formResponses.recipientEmail);
 
       // メール本文を生成
-      const emailBody = createEmailBody(name, department, questions, answers);
+      const emailBody = createEmailBody(employee[0].name, employee[0].department, formResponses.questions, formResponses.answers);
 
       // 件名を作成
-      const subject = '[回覧][否認されました] 休暇申請 申請者：' + name;
+      const subject = '[回覧][否認されました] 休暇申請 申請者：' + employee[0].name;
 
       // 申請者にメールを送信
-      sendEmail(recipientEmail, subject, emailBody);
+      sendEmail(formResponses.recipientEmail, subject, emailBody);
 
       // 回覧者にメールを送信する
       const readersArray = getReaders(id);
