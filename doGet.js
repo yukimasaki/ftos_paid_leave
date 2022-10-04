@@ -6,7 +6,7 @@ function doGet(e) {
   const paramIsApproved = e.parameters.is_approved;
   const paramToken = e.parameters.token;
   const id  = e.parameters.id;
-    
+
   // 二重送信の場合は処理を中止する
   if (isTokenMismatch(id, paramToken)) {
 
@@ -15,25 +15,34 @@ function doGet(e) {
 
   // 二重送信でない場合は処理を続行する
   } else {
-    
+
     // メールの「承認」リンクがクリックされた場合
     if (paramIsApproved == 'true') {
-      
+
       // 承認の途中段階である場合
       if (isPendingApproval(id)) {
-        
+
         const status = '承認中';
         const token = createId(25, 36);
         let currentApprovalStep =  getCurrentApprovalStep(id);
         currentApprovalStep++;
-        updatePaidLeaves(id, status, token, currentApprovalStep);
+
+        // updatePaidLeaveに渡すargsオブジェクト
+        const args = {
+          status: status,
+          token: token,
+          currentApprovalStep: currentApprovalStep
+        };
+
+        // スプレッドシートのレコードを更新する
+        updatePaidLeave(id, args);
         htmlMessage = '承認しました。';
 
         // 次の承認者にメールを送信する
         //フォームIDを取得
         const formId = getFormIdById(id);
 
-        // フォームIDを渡してフォームから回答内容を取得する  
+        // フォームIDを渡してフォームから回答内容を取得する
         const [
           recipientEmail,
           questions,
@@ -69,7 +78,7 @@ function doGet(e) {
         //フォームIDを取得
         const formId = getFormIdById(id);
 
-        // フォームIDを渡してフォームから回答内容を取得する  
+        // フォームIDを渡してフォームから回答内容を取得する
         const [
           recipientEmail,
           questions,
@@ -94,7 +103,7 @@ function doGet(e) {
         sendEmail(readersString, subject, emailBody);
 
       }
-    
+
     // メールの「否認」リンクがクリックされた場合
     } else {
 
@@ -108,7 +117,7 @@ function doGet(e) {
       //フォームIDを取得
       const formId = getFormIdById(id);
 
-      // フォームIDを渡してフォームから回答内容を取得する  
+      // フォームIDを渡してフォームから回答内容を取得する
       const [
         recipientEmail,
         questions,
@@ -131,7 +140,7 @@ function doGet(e) {
       const readersArray = getReaders(id);
       const readersString = readersArray.join(',');
       sendEmail(readersString, subject, emailBody);
-      
+
     }
   }
 

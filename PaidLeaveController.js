@@ -1,4 +1,12 @@
 function updatePaidLeave(id, args) {
+  tablePaidLeaves
+  .update({
+    'status': status,
+    'token': token,
+    'current_approval_step': currentApprovalStep
+  },{
+    'id': ['==', id]
+  });
 }
 
 function storePaidLeave(id, args) {
