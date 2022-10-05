@@ -46,7 +46,7 @@ async function onFormSubmit(e) {
   await storePaidLeave(id_new, args);
 
   // 承認者のメールアドレスを取得
-  const approverEmail = getCurrentApprover(id);
+  const approverEmail = getCurrentApprover(id_new);
 
   // メール本文を生成
   let emailBody = createEmailBody(employee, formResponses);
