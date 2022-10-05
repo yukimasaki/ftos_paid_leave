@@ -12,7 +12,7 @@ async function onFormSubmit(e) {
   const employee = getEmployee(formResponses.recipientEmail);
 
   // レコードIDをフォームIDから作成
-  const id = getFormIdByEvent(e);
+  const id = getFormId(e);
 
   // トークンを作成
   const token = createId(25, 36);
