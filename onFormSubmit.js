@@ -33,7 +33,7 @@ async function onFormSubmit(e) {
 
   // storePaidLeaveに渡すargsオブジェクト
   const args = {
-    formId: id_new,
+    id_new: id_new,
     recipientEmail: formResponses.recipientEmail,
     answers: formResponses.answers,
     name: employee[0].name,
