@@ -8,7 +8,7 @@ function doGet(e) {
   const id_new  = e.parameters.id_new;
 
   // 二重送信の場合は処理を中止する
-  if (isTokenMismatch(id, paramToken)) {
+  if (isTokenMismatch(id_new, paramToken)) {
 
     // 二重送信である旨をメッセージに記載する
     htmlMessage = '二重送信です。すでにステータスは変更されています。';

@@ -3,7 +3,7 @@ function getCurrentApprover(id_new) {
   // 現在の承認ステップ数、部署をオブジェクト形式で取得
   const results = tablePaidLeaves
   .select(['department', 'current_approval_step'])
-  .where({'form_id': ['==', id_new]})
+  .where({'id': ['==', id_new]})
   .result(false);
 
   const department = results[0].department;
