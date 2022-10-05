@@ -7,5 +7,5 @@ function getCurrentApprovalStep(id) {
     .result(true)
   );
 
-  return currentApprovalStep;
+  return result;
 }
