@@ -13,6 +13,7 @@ function getMaxApprovalStep(department) {
 }
 
 function getCurrentApprover(id) {
+  // 2つの関数に分割した方がよさそう？
   // 現在の承認ステップ数、部署をオブジェクト形式で取得
   const results = tablePaidLeaves
   .select(['department', 'current_approval_step'])
