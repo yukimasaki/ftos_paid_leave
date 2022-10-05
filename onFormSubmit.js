@@ -15,7 +15,7 @@ tableRoutes = db.table('routes');
 async function onFormSubmit(e) {
 
   // イベントオブジェクトを渡してフォームから回答内容を取得する
-  // 申請者のメールアドレス = formResponses.recipientEmail
+  // 申請者のメールアドレス = formResponses[i].recipientEmail
   // 設問 = formResponses.questions[i]
   // 回答 = formResponses.answers[i]
   const formResponses = getFormResponses(e);
@@ -49,7 +49,7 @@ async function onFormSubmit(e) {
   const approverEmail = getCurrentApprover(id);
 
   // メール本文を生成
-  let emailBody = createEmailBody(employee[0].name, employee[0].department, formResponses.questions, formResponses.answers);
+  let emailBody = createEmailBody(employee, formResponses);
   emailBody = emailBody + addApprovalLink(id, token);
 
   // 件名を作成
