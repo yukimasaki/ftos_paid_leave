@@ -94,12 +94,11 @@ function doGet(e) {
         sendEmail(formResponses.recipientEmail, subject, emailBody);
 
         // 回覧者にメールを送信する
-        if (getReaders(id) == '') {
+        if (getReaders(id) == false) {
           ;
         } else {
-          const readersArray = getReaders(id);
-          const readersString = readersArray.join(',');
-          sendEmail(readersString, subject, emailBody);
+          const readersToString = getReaders(id).join(',');
+          sendEmail(readersToString, subject, emailBody);
         }
       }
 
@@ -140,12 +139,11 @@ function doGet(e) {
       sendEmail(formResponses.recipientEmail, subject, emailBody);
 
       // 回覧者にメールを送信する
-      if (getReaders(id) == '') {
+      if (getReaders(id) == false) {
         ;
       } else {
-        const readersArray = getReaders(id);
-        const readersString = readersArray.join(',');
-        sendEmail(readersString, subject, emailBody);
+        const readersToString = getReaders(id).join(',');
+        sendEmail(readersToString, subject, emailBody);
       }
     }
   }

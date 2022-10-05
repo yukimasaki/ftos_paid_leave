@@ -12,5 +12,9 @@ function getReaders(id) {
   })
   .result(true)
 
-  return results;
+  if (results == '') {
+    return false;
+  } else {
+    return results;
+  }
 }
