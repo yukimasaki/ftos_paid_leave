@@ -1,18 +1,19 @@
 async function onFormSubmit(e) {
 
+  // レコードIDをフォームIDから作成
+  const id = getFormId(e);
+
   // イベントオブジェクトを渡してフォームから回答内容を取得する
   // 申請者のメールアドレス = formResponses[i].recipientEmail
   // 設問 = formResponses.questions[i]
   // 回答 = formResponses.answers[i]
-  const formResponses = getFormResponses(e);
+  const formResponses = getFormResponses(id);
 
   // 申請者の情報を取得
   // 氏名 = employee[0].name
   // 部署 = employee[0].department
   const employee = getEmployee(formResponses.recipientEmail);
 
-  // レコードIDをフォームIDから作成
-  const id = getFormId(e);
 
   // トークンを作成
   const token = createId(25, 36);

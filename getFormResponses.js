@@ -1,7 +1,6 @@
-function getFormResponses(e) {
-  // イベントオブジェクトを受け取りGoogleFormから回答内容を取得する : デバッグ時は1番目の回答を取得する
+function getFormResponses(id) {
   // フォーム自体を取得
-  const formResponses = (e !== undefined) ? e.response : FormApp.getActiveForm().getResponses()[0];
+  const formResponses = FormApp.getActiveForm().getResponses()[id];
 
   // フォーム内の各アイテムを取得
   const itemResponses = formResponses.getItemResponses();

@@ -41,7 +41,7 @@ function doGet(e) {
         // 次の承認者にメールを送信する
 
         // フォームIDを渡してフォームから回答内容を取得する
-        const formResponses = getFormResponsesById(id);
+        const formResponses = getFormResponses(id);
 
         // 申請者の情報を取得
         const employee = getEmployee(formResponses.recipientEmail);
@@ -81,7 +81,7 @@ function doGet(e) {
         // 申請者に承認完了を知らせるメールを送信する
 
         // フォームIDを渡してフォームから回答内容を取得する
-        const formResponses = getFormResponsesById(id);
+        const formResponses = getFormResponses(id);
 
         // 申請者の情報を取得
         const employee = getEmployee(formResponses.recipientEmail);
@@ -127,7 +127,7 @@ function doGet(e) {
       // 申請者に否認を知らせるメールを送信する
 
       // フォームIDを渡してフォームから回答内容を取得する
-      const formResponses = getFormResponsesById(id);
+      const formResponses = getFormResponses(id);
 
       // 申請者の情報を取得
       const employee = getEmployee(formResponses.recipientEmail);
