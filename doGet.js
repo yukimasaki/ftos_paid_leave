@@ -47,11 +47,11 @@ function doGet(e) {
         const employee = getEmployee(formResponses.recipientEmail);
 
         // 承認者のメールアドレスを取得
-        const approverEmail = getCurrentApprover(id);
+        const approverEmail = getCurrentApprover(id_new);
 
         // メール本文を生成
         let emailBody = createEmailBody(employee, formResponses);
-        emailBody = emailBody + addApprovalLink(id, token);
+        emailBody = emailBody + addApprovalLink(id_new, token);
 
         // 件名を作成
         const subject = '[承認依頼] 休暇申請 申請者：' + employee[0].name;
@@ -64,7 +64,7 @@ function doGet(e) {
 
         const status = '承認完了';
         const token = createId(25, 36);
-        const currentApprovalStep = getCurrentApprovalStep(id);
+        const currentApprovalStep = getCurrentApprovalStep(id_new);
 
         // updatePaidLeaveに渡すargsオブジェクト
         const args = {
@@ -74,7 +74,7 @@ function doGet(e) {
         };
 
         // スプレッドシートのレコードを更新する
-        updatePaidLeave(id, args);
+        updatePaidLeave(id_new, args);
 
         htmlMessage = '承認を完了しました。';
 
@@ -96,10 +96,10 @@ function doGet(e) {
         sendEmail(formResponses.recipientEmail, subject, emailBody);
 
         // 回覧者にメールを送信する
-        if (getReaders(id) == '') {
+        if (getReaders(id_new) == '') {
           ;
         } else {
-          const readersArray = getReaders(id);
+          const readersArray = getReaders(id_new);
           const readersString = readersArray.join(',');
           sendEmail(readersString, subject, emailBody);
         }
@@ -110,7 +110,7 @@ function doGet(e) {
 
       const status = '否認';
       const token = createId(25, 36);
-      const currentApprovalStep = getCurrentApprovalStep(id);
+      const currentApprovalStep = getCurrentApprovalStep(id_new);
 
       // updatePaidLeaveに渡すargsオブジェクト
       const args = {
@@ -120,7 +120,7 @@ function doGet(e) {
       };
 
       // スプレッドシートのレコードを更新する
-      updatePaidLeave(id, args);
+      updatePaidLeave(id_new, args);
 
       htmlMessage = '否認しました。';
 
@@ -142,10 +142,10 @@ function doGet(e) {
       sendEmail(formResponses.recipientEmail, subject, emailBody);
 
       // 回覧者にメールを送信する
-      if (getReaders(id) == '') {
+      if (getReaders(id_new) == '') {
         ;
       } else {
-        const readersArray = getReaders(id);
+        const readersArray = getReaders(id_new);
         const readersString = readersArray.join(',');
         sendEmail(readersString, subject, emailBody);
       }

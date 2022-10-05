@@ -1,7 +1,7 @@
-function getReaders(id) {
+function getReaders(id_new) {
   const department = tablePaidLeaves
   .select(['department'])
-  .where({'id': ['==', id]})
+  .where({'id': ['==', id_new]})
   .result(true);
 
   const results = tableRoutes
