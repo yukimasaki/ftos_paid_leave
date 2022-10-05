@@ -1,7 +1,7 @@
-function isTokenMismatch(id, paramToken) {
+function isTokenMismatch(id_new, paramToken) {
   const latestApprover = tablePaidLeaves
   .select(['token'])
-  .where({id: ['==', id]})
+  .where({'id_new': ['==', id_new]})
   .result(false);
 
   return latestApprover[0].token != paramToken;

@@ -5,7 +5,7 @@ function doGet(e) {
   // URLから受け取ったパラメータを代入
   const paramIsApproved = e.parameters.is_approved;
   const paramToken = e.parameters.token;
-  const id  = e.parameters.id;
+  const id_new  = e.parameters.id_new;
 
   // 二重送信の場合は処理を中止する
   if (isTokenMismatch(id, paramToken)) {
