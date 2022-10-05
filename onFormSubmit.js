@@ -25,15 +25,15 @@ async function onFormSubmit(e) {
   // 部署 = employee[0].department
   const employee = getEmployee(formResponses.recipientEmail);
 
-  // レコードIDを作成
-  const id = createId(0, 8);
+  // レコードIDをフォームIDから作成
+  const id_new = getFormIdByEvent(e);
 
   // トークンを作成
   const token = createId(25, 36);
 
   // storePaidLeaveに渡すargsオブジェクト
   const args = {
-    formId: getFormIdByEvent(e),
+    formId: id_new,
     recipientEmail: formResponses.recipientEmail,
     answers: formResponses.answers,
     name: employee[0].name,
@@ -43,7 +43,7 @@ async function onFormSubmit(e) {
     token: token
   };
   // フォームの回答内容をスプレッドシートに挿入する
-  await storePaidLeave(id, args);
+  await storePaidLeave(id_new, args);
 
   // 承認者のメールアドレスを取得
   const approverEmail = getCurrentApprover(id);

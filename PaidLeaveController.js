@@ -9,10 +9,9 @@ function updatePaidLeave(id, args) {
   });
 }
 
-function storePaidLeave(id, args) {
+function storePaidLeave(id_new, args) {
   tablePaidLeaves.insert([
     {
-      'id': id,
       'form_id': args.formId,
       'recipient_email': args.recipientEmail,
       'recipient_name': args.name,
