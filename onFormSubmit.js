@@ -1,6 +1,6 @@
 async function onFormSubmit(e) {
 
-  // レコードIDをフォームIDから作成
+  // レコードIDをフォームIDから取得
   const id = getFormId(e);
 
   // イベントオブジェクトを渡してフォームから回答内容を取得する
