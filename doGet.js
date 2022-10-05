@@ -39,8 +39,6 @@ function doGet(e) {
         htmlMessage = '承認しました。';
 
         // 次の承認者にメールを送信する
-        //フォームIDを取得
-        const formId = getFormIdById(id);
 
         // フォームIDを渡してフォームから回答内容を取得する
         const formResponses = getFormResponsesByFormId(formId);
@@ -81,8 +79,6 @@ function doGet(e) {
         htmlMessage = '承認を完了しました。';
 
         // 申請者に承認完了を知らせるメールを送信する
-        //フォームIDを取得
-        const formId = getFormIdById(id);
 
         // フォームIDを渡してフォームから回答内容を取得する
         const formResponses = getFormResponsesByFormId(formId);
@@ -129,8 +125,6 @@ function doGet(e) {
       htmlMessage = '否認しました。';
 
       // 申請者に否認を知らせるメールを送信する
-      //フォームIDを取得
-      const formId = getFormIdById(id);
 
       // フォームIDを渡してフォームから回答内容を取得する
       const formResponses = getFormResponsesByFormId(formId);
