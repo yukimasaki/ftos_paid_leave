@@ -52,7 +52,7 @@ function doGet(e) {
         const approverEmail = getCurrentApprover(id);
 
         // メール本文を生成
-        let emailBody = createEmailBody(employee[0].name, employee[0].department, formResponses.questions, formResponses.answers);
+        let emailBody = createEmailBody(employee, formResponses);
         emailBody = emailBody + addApprovalLink(id, token);
 
         // 件名を作成
@@ -91,7 +91,7 @@ function doGet(e) {
         const employee = getEmployee(formResponses.recipientEmail);
 
         // メール本文を生成
-        const emailBody = createEmailBody(employee[0].name, employee[0].department, formResponses.questions, formResponses.answers);
+        const emailBody = createEmailBody(employee, formResponses);
 
         // 件名を作成
         const subject = '[回覧][承認されました] 休暇申請 申請者：' + employee[0].name;
@@ -139,7 +139,7 @@ function doGet(e) {
       const employee = getEmployee(formResponses.recipientEmail);
 
       // メール本文を生成
-      const emailBody = createEmailBody(employee[0].name, employee[0].department, formResponses.questions, formResponses.answers);
+      const emailBody = createEmailBody(employee, formResponses);
 
       // 件名を作成
       const subject = '[回覧][否認されました] 休暇申請 申請者：' + employee[0].name;
@@ -157,9 +157,6 @@ function doGet(e) {
       }
     }
   }
-
-  // 画面に描画
-  htmlMessage = htmlMessage + '<br><br>';
 
   return HtmlService.createHtmlOutput(htmlMessage);
 }
