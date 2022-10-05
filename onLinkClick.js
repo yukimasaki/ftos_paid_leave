@@ -22,11 +22,11 @@ function doGet(e) {
       // 承認の途中段階である場合
       if (isPendingApproval(id)) {
 
+        // updatePaidLeaveに渡すargsオブジェクトを作成
         const status = '承認中';
         const token = createId(25, 36);
         const currentApprovalStep = getCurrentApprovalStep(id) + 1; // 加算する
 
-        // updatePaidLeaveに渡すargsオブジェクト
         const args = {
           status: status,
           token: token,
@@ -61,11 +61,11 @@ function doGet(e) {
       //承認の最終段階である場合
       } else {
 
+        // updatePaidLeaveに渡すargsオブジェクトを作成
         const status = '承認完了';
         const token = createId(25, 36);
         const currentApprovalStep = getCurrentApprovalStep(id);
 
-        // updatePaidLeaveに渡すargsオブジェクト
         const args = {
           status: status,
           token: token,
@@ -74,7 +74,6 @@ function doGet(e) {
 
         // スプレッドシートのレコードを更新する
         updatePaidLeave(id, args);
-
         htmlMessage = '承認を完了しました。';
 
         // 申請者に承認完了を知らせるメールを送信する
@@ -107,11 +106,11 @@ function doGet(e) {
     // メールの「否認」リンクがクリックされた場合
     } else {
 
+      // updatePaidLeaveに渡すargsオブジェクトを作成
       const status = '否認';
       const token = createId(25, 36);
       const currentApprovalStep = getCurrentApprovalStep(id);
 
-      // updatePaidLeaveに渡すargsオブジェクト
       const args = {
         status: status,
         token: token,
