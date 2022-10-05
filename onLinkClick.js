@@ -24,8 +24,7 @@ function doGet(e) {
 
         const status = '承認中';
         const token = createId(25, 36);
-        let currentApprovalStep = getCurrentApprovalStep(id);
-        currentApprovalStep++;
+        const currentApprovalStep = getCurrentApprovalStep(id) + 1; // 加算する
 
         // updatePaidLeaveに渡すargsオブジェクト
         const args = {
