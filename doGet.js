@@ -20,11 +20,11 @@ function doGet(e) {
     if (paramIsApproved == 'true') {
 
       // 承認の途中段階である場合
-      if (isPendingApproval(id)) {
+      if (isPendingApproval(id_new)) {
 
         const status = '承認中';
         const token = createId(25, 36);
-        let currentApprovalStep = getCurrentApprovalStep(id);
+        let currentApprovalStep = getCurrentApprovalStep(id_new);
         currentApprovalStep++;
 
         // updatePaidLeaveに渡すargsオブジェクト
@@ -35,7 +35,7 @@ function doGet(e) {
         };
 
         // スプレッドシートのレコードを更新する
-        updatePaidLeave(id, args);
+        updatePaidLeave(id_new, args);
         htmlMessage = '承認しました。';
 
         // 次の承認者にメールを送信する
