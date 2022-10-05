@@ -14,7 +14,6 @@ async function onFormSubmit(e) {
   // 部署 = employee[0].department
   const employee = getEmployee(formResponses.recipientEmail);
 
-
   // トークンを作成
   const token = createId(25, 36);
 
