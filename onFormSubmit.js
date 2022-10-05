@@ -26,14 +26,13 @@ async function onFormSubmit(e) {
   const employee = getEmployee(formResponses.recipientEmail);
 
   // レコードIDをフォームIDから作成
-  const id_new = getFormIdByEvent(e);
+  const id = getFormIdByEvent(e);
 
   // トークンを作成
   const token = createId(25, 36);
 
   // storePaidLeaveに渡すargsオブジェクト
   const args = {
-    id_new: id_new,
     recipientEmail: formResponses.recipientEmail,
     answers: formResponses.answers,
     name: employee[0].name,
@@ -43,14 +42,14 @@ async function onFormSubmit(e) {
     token: token
   };
   // フォームの回答内容をスプレッドシートに挿入する
-  await storePaidLeave(id_new, args);
+  await storePaidLeave(id, args);
 
   // 承認者のメールアドレスを取得
-  const approverEmail = getCurrentApprover(id_new);
+  const approverEmail = getCurrentApprover(id);
 
   // メール本文を生成
   let emailBody = createEmailBody(employee, formResponses);
-  emailBody = emailBody + addApprovalLink(id_new, token);
+  emailBody = emailBody + addApprovalLink(id, token);
 
   // 件名を作成
   const subject = '[承認依頼] 休暇申請 申請者：' + employee[0].name;

@@ -1,7 +1,7 @@
-function isPendingApproval(id_new) {
+function isPendingApproval(id) {
   const results = tablePaidLeaves
   .select(['current_approval_step', 'max_approval_step'])
-  .where({'id': ['==', id_new]})
+  .where({'id': ['==', id]})
   .result(false)
 
   const currentApprovalStep = results[0].current_approval_step;

@@ -1,18 +1,18 @@
-function updatePaidLeave(id_new, args) {
+function updatePaidLeave(id, args) {
   tablePaidLeaves
   .update({
     'status': args.status,
     'token': args.token,
     'current_approval_step': args.currentApprovalStep
   },{
-    'id': ['==', id_new]
+    'id': ['==', id]
   });
 }
 
-function storePaidLeave(id_new, args) {
+function storePaidLeave(id, args) {
   tablePaidLeaves.insert([
     {
-      'id': args.id_new,
+      'id': id,
       'recipient_email': args.recipientEmail,
       'recipient_name': args.name,
       'department': args.department,

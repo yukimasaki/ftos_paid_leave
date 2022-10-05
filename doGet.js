@@ -5,10 +5,10 @@ function doGet(e) {
   // URLから受け取ったパラメータを代入
   const paramIsApproved = e.parameters.is_approved;
   const paramToken = e.parameters.token;
-  const id_new  = e.parameters.id_new;
+  const id  = e.parameters.id;
 
   // 二重送信の場合は処理を中止する
-  if (isTokenMismatch(id_new, paramToken)) {
+  if (isTokenMismatch(id, paramToken)) {
 
     // 二重送信である旨をメッセージに記載する
     htmlMessage = '二重送信です。すでにステータスは変更されています。';
@@ -20,11 +20,11 @@ function doGet(e) {
     if (paramIsApproved == 'true') {
 
       // 承認の途中段階である場合
-      if (isPendingApproval(id_new)) {
+      if (isPendingApproval(id)) {
 
         const status = '承認中';
         const token = createId(25, 36);
-        let currentApprovalStep = getCurrentApprovalStep(id_new);
+        let currentApprovalStep = getCurrentApprovalStep(id);
         currentApprovalStep++;
 
         // updatePaidLeaveに渡すargsオブジェクト
@@ -35,23 +35,23 @@ function doGet(e) {
         };
 
         // スプレッドシートのレコードを更新する
-        updatePaidLeave(id_new, args);
+        updatePaidLeave(id, args);
         htmlMessage = '承認しました。';
 
         // 次の承認者にメールを送信する
 
         // フォームIDを渡してフォームから回答内容を取得する
-        const formResponses = getFormResponsesById(id_new);
+        const formResponses = getFormResponsesById(id);
 
         // 申請者の情報を取得
         const employee = getEmployee(formResponses.recipientEmail);
 
         // 承認者のメールアドレスを取得
-        const approverEmail = getCurrentApprover(id_new);
+        const approverEmail = getCurrentApprover(id);
 
         // メール本文を生成
         let emailBody = createEmailBody(employee, formResponses);
-        emailBody = emailBody + addApprovalLink(id_new, token);
+        emailBody = emailBody + addApprovalLink(id, token);
 
         // 件名を作成
         const subject = '[承認依頼] 休暇申請 申請者：' + employee[0].name;
@@ -64,7 +64,7 @@ function doGet(e) {
 
         const status = '承認完了';
         const token = createId(25, 36);
-        const currentApprovalStep = getCurrentApprovalStep(id_new);
+        const currentApprovalStep = getCurrentApprovalStep(id);
 
         // updatePaidLeaveに渡すargsオブジェクト
         const args = {
@@ -74,14 +74,14 @@ function doGet(e) {
         };
 
         // スプレッドシートのレコードを更新する
-        updatePaidLeave(id_new, args);
+        updatePaidLeave(id, args);
 
         htmlMessage = '承認を完了しました。';
 
         // 申請者に承認完了を知らせるメールを送信する
 
         // フォームIDを渡してフォームから回答内容を取得する
-        const formResponses = getFormResponsesById(id_new);
+        const formResponses = getFormResponsesById(id);
 
         // 申請者の情報を取得
         const employee = getEmployee(formResponses.recipientEmail);
@@ -96,10 +96,10 @@ function doGet(e) {
         sendEmail(formResponses.recipientEmail, subject, emailBody);
 
         // 回覧者にメールを送信する
-        if (getReaders(id_new) == '') {
+        if (getReaders(id) == '') {
           ;
         } else {
-          const readersArray = getReaders(id_new);
+          const readersArray = getReaders(id);
           const readersString = readersArray.join(',');
           sendEmail(readersString, subject, emailBody);
         }
@@ -110,7 +110,7 @@ function doGet(e) {
 
       const status = '否認';
       const token = createId(25, 36);
-      const currentApprovalStep = getCurrentApprovalStep(id_new);
+      const currentApprovalStep = getCurrentApprovalStep(id);
 
       // updatePaidLeaveに渡すargsオブジェクト
       const args = {
@@ -120,14 +120,14 @@ function doGet(e) {
       };
 
       // スプレッドシートのレコードを更新する
-      updatePaidLeave(id_new, args);
+      updatePaidLeave(id, args);
 
       htmlMessage = '否認しました。';
 
       // 申請者に否認を知らせるメールを送信する
 
       // フォームIDを渡してフォームから回答内容を取得する
-      const formResponses = getFormResponsesById(id_new);
+      const formResponses = getFormResponsesById(id);
 
       // 申請者の情報を取得
       const employee = getEmployee(formResponses.recipientEmail);
@@ -142,10 +142,10 @@ function doGet(e) {
       sendEmail(formResponses.recipientEmail, subject, emailBody);
 
       // 回覧者にメールを送信する
-      if (getReaders(id_new) == '') {
+      if (getReaders(id) == '') {
         ;
       } else {
-        const readersArray = getReaders(id_new);
+        const readersArray = getReaders(id);
         const readersString = readersArray.join(',');
         sendEmail(readersString, subject, emailBody);
       }
