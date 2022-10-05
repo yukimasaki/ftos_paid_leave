@@ -1,17 +1,3 @@
-// 環境設定を読み込む
-settings = setSettings();
-
-// データベース関連の設定をグローバルに宣言
-// スプレッドシート「ftos_workflow」をDBとして指定
-db = SSheetDB.open(settings.DB_SPREADSHEET_ID);
-// 従業員テーブルを指定
-tableEmployees = db.table('employees');
-// 申請記録テーブルを指定
-tablePaidLeaves = db.table('paid_leaves');
-// 申請ルートテーブルを指定
-tableRoutes = db.table('routes');
-
-// メイン処理
 async function onFormSubmit(e) {
 
   // イベントオブジェクトを渡してフォームから回答内容を取得する
