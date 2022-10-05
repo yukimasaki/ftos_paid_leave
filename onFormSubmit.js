@@ -50,7 +50,7 @@ async function onFormSubmit(e) {
 
   // メール本文を生成
   let emailBody = createEmailBody(employee, formResponses);
-  emailBody = emailBody + addApprovalLink(id, token);
+  emailBody = emailBody + addApprovalLink(id_new, token);
 
   // 件名を作成
   const subject = '[承認依頼] 休暇申請 申請者：' + employee[0].name;
