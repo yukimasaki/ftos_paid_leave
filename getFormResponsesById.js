@@ -1,6 +1,6 @@
-function getFormResponsesByFormId(formId) {
+function getFormResponsesById(id_new) {
   // フォーム自体を取得
-  const formResponses = FormApp.getActiveForm().getResponses()[formId];
+  const formResponses = FormApp.getActiveForm().getResponses()[id_new];
 
   // フォーム内の各アイテムを取得
   const itemResponses = formResponses.getItemResponses();
